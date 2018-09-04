@@ -9,7 +9,7 @@ def withBuildVars(Map filter) {
         println "Trying to match with ${tempFilter}"
         def result = tempFilter - buildVariables
         println "Result is ${result}"
-        if(result.empty) {
+        if(!result) {
             println "Matched ${previousBuild.number}"
             matches << previousBuild
         }
