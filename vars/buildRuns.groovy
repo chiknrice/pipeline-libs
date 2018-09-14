@@ -21,12 +21,14 @@ def withBuildVars(Map filter) {
     return matches
 }
 
-def inspectPreviousRuns(int buildToClean, RunWrapper thisBuild = currentBuild) {
+def inspectPreviousRuns(int buildToInspect, RunWrapper thisBuild = currentBuild) {
     WorkflowRun run = thisBuild.rawBuild
-    while (run.number > buildToClean) {
+    while (run.number > buildToInspect) {
         run = run.previousBuild
     }
-    run.deleteArtifacts()
+    //run.deleteArtifacts()
+    println "Actions of build ${buildToInspect}"
+    run.allActions.each { println it }
 }
 
 def doSomething(Closure something) {
