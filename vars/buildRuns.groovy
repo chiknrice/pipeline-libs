@@ -1,3 +1,5 @@
+import hudson.model.Run
+import org.jenkinsci.plugins.workflow.support.steps.build.RunWrapper
 
 def withBuildVars(Map filter) {
     def matches = []
@@ -16,4 +18,9 @@ def withBuildVars(Map filter) {
         previousBuild = previousBuild.previousBuild
     }
     return matches
+}
+
+def inspectPreviousRuns(RunWrapper thisBuild = currentBuild) {
+    def rawBuild = thisBuild.rawBuild
+    println rawBuild.getClass().getName()
 }
