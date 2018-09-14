@@ -1,4 +1,5 @@
 import hudson.model.Run
+import org.jenkinsci.plugins.workflow.job.WorkflowRun
 import org.jenkinsci.plugins.workflow.support.steps.build.RunWrapper
 
 def withBuildVars(Map filter) {
@@ -20,7 +21,10 @@ def withBuildVars(Map filter) {
     return matches
 }
 
-def inspectPreviousRuns(RunWrapper thisBuild = currentBuild) {
-    def rawBuild = thisBuild.rawBuild
-    println rawBuild.getClass().getName()
+def inspectPreviousRuns(int buildToClean, RunWrapper thisBuild = currentBuild) {
+    WorkflowRun run = thisBuild.rawBuild
+    while (run.number > buildToClean) {
+        run = run.previousBuild
+    }
+    run.deleteArtifacts()
 }

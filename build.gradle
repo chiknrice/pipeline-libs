@@ -65,6 +65,7 @@ jenkinsPlugin {
 dependencies {
     compile localGroovy()
     compile group: 'org.jenkins-ci.main', name: 'jenkins-core', version: '2.121.3'
+    jenkinsPlugins group: 'org.jenkins-ci.plugins.workflow', name: 'workflow-job', version: '2.20'
     jenkinsPlugins group: 'org.jenkins-ci.plugins.workflow', name: 'workflow-support', version: '2.20'
 }
 
