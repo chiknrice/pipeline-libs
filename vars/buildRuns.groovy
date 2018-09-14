@@ -28,3 +28,7 @@ def inspectPreviousRuns(int buildToClean, RunWrapper thisBuild = currentBuild) {
     }
     run.deleteArtifacts()
 }
+
+def doSomething(Closure something) {
+    something()
+}
