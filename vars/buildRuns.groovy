@@ -33,7 +33,7 @@ def inspectPreviousRuns(int buildToInspect, RunWrapper thisBuild = currentBuild)
 
 def deleteArtifacts(int buildNumber, RunWrapper thisBuild = currentBuild) {
     WorkflowRun run = thisBuild.rawBuild
-    while (run.number > buildToInspect) {
+    while (run.number > buildNumber) {
         run = run.previousBuild
     }
     run.deleteArtifacts()
