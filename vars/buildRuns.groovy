@@ -26,7 +26,6 @@ def inspectPreviousRuns(int buildToInspect, RunWrapper thisBuild = currentBuild)
     while (run.number > buildToInspect) {
         run = run.previousBuild
     }
-    //run.deleteArtifacts()
     println "Actions of build ${buildToInspect}"
     run.allActions.each { println it }
 }
@@ -37,6 +36,8 @@ def deleteArtifacts(int buildNumber, RunWrapper thisBuild = currentBuild) {
         run = run.previousBuild
     }
     run.deleteArtifacts()
+    CacheExtension cacheExtension = Jenkins.instance.getExtensionList(CacheExtension).get(0)
+    cacheExtension.getRunCache().invalidate(run.externalizableId)
 }
 
 def doSomething(Closure something) {
